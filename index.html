@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>El sucesor de Zara</title>
+
+    
+
+    <link rel="prefetch" href="static/1.png" />
+    <link rel="prefetch" href="static/2.png" />
+    <link rel="prefetch" href="static/3.png" />
+    <link rel="prefetch" href="static/4.png" />
+    <link rel="prefetch" href="static/5.png" />
+    <link rel="prefetch" href="static/6.png" />
+    <link rel="prefetch" href="static/cover.png" />
+    <link rel="prefetch" href="static/facebook.png" />
+    <link rel="prefetch" href="static/twitter.png" />
+    <link rel="prefetch" href="static/whatsapp.png" />
+    <link rel="prefetch" href="static/music.mp3" />
+    <link rel="prefetch" href="static/ok3.mp3" />
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/vivirenremoto/confetti.js/confetti.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+
+
+    <meta property="og:image" content="https://vivirenremoto.github.io/el_succesor/static/cover.png">
+    <meta property="og:image:secure_url"
+        content="https://vivirenremoto.github.io/el_succesor/static/cover.png">
+    <meta property="og:image:alt" content="El sucesor de Zara">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="El sucesor de Zara">
+    <meta name="twitter:image" content="https://vivirenremoto.github.io/el_succesor/static/cover.png">
+
+</head>
+<body style="background:#9adae7;">
+
+<style>
+* {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+body {
+    overflow-x:hidden;
+    touch-action: pan-x pan-y;
+}
+
+.btn_social{cursor: pointer;margin:0 10px;}
+</style>
+
+
+
+
+
+
+<div id="intro" style="display:block;position:fixed;top:50%;left:50%;text-align:center;width:590px;margin-top:-245px;margin-left:-295px;">
+    
+    <h1>El sucesor de Amancio Ortega</h1>
+
+    <img src="static/cover.png" alt="El sucesor de Amancio Ortega" width="590" height="300" onclick="StartGame()" style="cursor:pointer;max-width:80%;">
+
+    <button onclick="StartGame()" style="cursor:pointer;border:5px black solid;background:white;font-size:30px;display:block;text-align:center;width:250px;margin:auto;margin-top:30px;">JUGAR</button>
+</div>
+
+<div id="game" style="display:none;cursor:pointer;text-align:center;position:fixed;top:50%;left:50%;text-align:center;margin-top:-86px;margin-left:-110px;">
+
+    <div style="position:fixed;left:0;top:15px;width:100%;text-align:center;">
+        <div id="time" style="color:blue;font-size:50px;">01:00</div>
+    
+        <div style="color:black;font-size:35px;"><span id="shirts">0</span> camisetas</div>
+    
+    </div>
+
+
+
+    <img src="static/1.png" id="camiseta">
+</div>
+
+<div id="end" style="display:none;font-size:30px;text-align:center;position:fixed;top:50%;left:50%;text-align:center;margin-top:-180px;margin-left:-125px;width:250px;">
+    camisetas dobladas
+    <div style="font-size:100px;margin-top:-20px;" id="shirts_final">0</div>
+    <br><br>
+    compartir
+    <div style="padding-top:15px;">
+        <img src="static/twitter.png" class="btn_social" alt="twitter"> 
+        <img src="static/facebook.png" class="btn_social" alt="facebook"> 
+        <img src="static/whatsapp.png" class="btn_social" alt="whatsapp"> 
+    </div>
+    <button onclick="StartGame()" style="cursor:pointer;border:5px black solid;background:white;font-size:30px;display:block;margin-top:30px;text-align:center;width:100%;">¿REPETIR?</button>
+</div>
+
+
+<div style="position:fixed;left:0;bottom:15px;text-align:center;width:100%;">
+<a href="https://twitter.com/comandogdev" target="_blank" style="font-size:30px;color:black;">by @comandogdev</a>
+</div>
+
+<audio id="bg_music">
+    <source src="static/music.mp3" type="audio/mp3">
+</audio>
+
+
+<audio id="sound_ok">
+    <source src="static/ok3.mp3" type="audio/mp3">
+</audio>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+var score;
+var clics;
+var timer;
+var music = document.getElementById('bg_music');
+music.volume = 0.5;
+var sound_ok = document.getElementById('sound_ok');
+sound_ok.volume = 1;
+
+
+
+$('#game').click(function(){
+    if( time ){
+        clics++;
+
+
+        
+        if( clics == 6 ){
+            sound_ok.play(0);
+        }
+
+        if( clics > 6 ){
+            clics = 1;
+            score++;
+            $('#shirts').html(score);
+        }
+
+
+        var url = 'static/' + clics + '.png';
+        $('#camiseta').attr('src', url);
+    }
+});
+
+function StartGame(){
+    time = 60;
+    score = 0;
+    clics = 1;
+    $('#intro').hide();
+    $('#end').hide();
+    $('#game').show();
+    $('#time').html('01:00');
+    $('#shirts').html(score);
+    music.play(0);
+
+    
+    var url = 'static/1.png';
+    $('#camiseta').attr('src', url);
+
+    timer = setInterval(function(){
+        time--;
+        if( time <= 0 ){
+            EndGame();
+        }
+        time_aux = time;
+        if( time < 10 ) time_aux = '0' + time_aux;
+        $('#time').html('00:'+time_aux);
+    }, 1000);
+}
+
+function EndGame(){
+    $('#shirts_final').html(score);
+    $('#end').show();
+    $('#game').hide();
+    clearInterval(timer);
+    music.pause();
+
+    confetti.start();
+
+    setTimeout(function () {
+        confetti.stop();
+    }, 1000);
+}
+
+
+
+
+$(function () {
+    $('.btn_social').click(function () {
+        var network = $(this).attr('alt');
+        var share_url = document.location.href;
+
+
+        var share_message = 'Merezco ser el succesor de Amancio Ortega';
+        if (score) {
+            share_message = ' 👕' + score + ' camisetas dobladas 👊 ¡Supera mi puntuación!';
+        }
+
+
+        if (network == 'twitter') {
+            share_url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(share_message) + '&tw_p=tweetbutton&url=' + share_url;
+
+        } else if (network == 'facebook') {
+            share_url = 'https://www.facebook.com/sharer/sharer.php?u=' + share_url + '&quote=' + encodeURIComponent(share_message);
+
+        } if (network == 'whatsapp') {
+            share_url = 'whatsapp://send?text=' + encodeURIComponent(share_message + ' ' + share_url);
+        }
+
+
+        window.open(share_url);
+
+    });
+
+});
+</script>
+
+</body>
+</html>
