@@ -213,10 +213,13 @@ function StartGame(){
 
 function EndGame(){
     $('#shirts_final').html(score);
-    $('#end').show();
     $('#game').hide();
     $('#author').show();
     clearInterval(timer);
+
+    setTimeout(function(){
+        $('#end').show();
+    }, 1000);
 
     confetti.start();
 
