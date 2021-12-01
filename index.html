@@ -77,9 +77,9 @@ body {
 
 <div id="intro" style="display:block;position:fixed;top:50%;left:50%;text-align:center;width:590px;margin-top:-245px;margin-left:-295px;">
     
-    <h1>El sucesor de Amancio Ortega</h1>
+    <h1>El sucesor de Zara</h1>
 
-    <img src="static/cover.png" alt="El sucesor de Amancio Ortega" width="590" height="300" onclick="StartGame()" style="cursor:pointer;max-width:80%;">
+    <img src="static/cover.png" alt="El sucesor de Zara" width="590" height="300" onclick="StartGame()" style="cursor:pointer;max-width:80%;">
 
     <button onclick="StartGame()" style="cursor:pointer;border:5px black solid;background:white;font-size:30px;display:block;text-align:center;width:250px;margin:auto;margin-top:30px;">JUGAR</button>
 </div>
@@ -137,7 +137,7 @@ sound_ok.volume = 1;
 
 
 
-$('#game').click(function(){
+$('body').click(function(){
     if( time ){
         clics++;
 
