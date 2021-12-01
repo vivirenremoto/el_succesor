@@ -84,7 +84,7 @@ body {
     <button onclick="StartGame()" style="cursor:pointer;border:5px black solid;background:white;font-size:30px;display:block;text-align:center;width:250px;margin:auto;margin-top:30px;">JUGAR</button>
 </div>
 
-<div id="game" style="display:none;cursor:pointer;text-align:center;position:fixed;top:50%;left:50%;text-align:center;margin-top:-86px;margin-left:-110px;">
+<div id="game" style="z-index:999;display:none;cursor:pointer;text-align:center;position:fixed;text-align:center;">
 
     <div style="position:fixed;left:0;top:15px;width:100%;text-align:center;">
         <div id="time" style="color:blue;font-size:50px;">01:00</div>
@@ -112,8 +112,8 @@ body {
 </div>
 
 
-<div style="position:fixed;left:0;bottom:15px;text-align:center;width:100%;">
-<a href="https://twitter.com/comandogdev" target="_blank" style="font-size:30px;color:black;">by @comandogdev</a>
+<div id="author" style="position:fixed;left:0;bottom:15px;text-align:center;width:100%;">
+    <a href="https://twitter.com/comandogdev" target="_blank" style="font-size:30px;color:black;">by @comandogdev</a>
 </div>
 
 <audio id="bg_music">
@@ -130,14 +130,18 @@ body {
 var score;
 var clics;
 var timer;
+var screen_height = $(document).height();
+var screen_width = $(document).width();
 var music = document.getElementById('bg_music');
-music.volume = 0.5;
 var sound_ok = document.getElementById('sound_ok');
+var shirt_width = 219;
+var shirt_height = 176;
 sound_ok.volume = 1;
+music.volume = 0.5;
 
 
 
-$('body').click(function(){
+$('#game').click(function(){
     if( time ){
         clics++;
 
@@ -151,6 +155,10 @@ $('body').click(function(){
             clics = 1;
             score++;
             $('#shirts').html(score);
+
+            RandomCamiseta();
+            
+
         }
 
 
@@ -165,10 +173,17 @@ function StartGame(){
     clics = 1;
     $('#intro').hide();
     $('#end').hide();
+    $('#author').hide();
     $('#game').show();
     $('#time').html('01:00');
     $('#shirts').html(score);
     music.play(0);
+
+
+    var shirt_left = (screen_width-shirt_width)/2;
+    var shirt_top = (screen_height-shirt_height)/2;
+    $('#game').css('left', shirt_left).css('top', shirt_top);
+
 
     
     var url = 'static/1.png';
@@ -189,8 +204,9 @@ function EndGame(){
     $('#shirts_final').html(score);
     $('#end').show();
     $('#game').hide();
+    $('#author').show();
     clearInterval(timer);
-    music.pause();
+    //music.pause();
 
     confetti.start();
 
@@ -200,6 +216,25 @@ function EndGame(){
 }
 
 
+function randomNumber(min, max) {
+    if (min > max) {
+        let temp = max;
+        max = min;
+        min = temp;
+    }
+
+    if (min <= 0) {
+        return Math.floor(Math.random() * (max + Math.abs(min) + 1)) + min;
+    } else {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+}
+
+function RandomCamiseta(){
+    var rand_left = randomNumber(0,screen_width-shirt_width);
+    var rand_top = randomNumber(0,screen_height-shirt_height);
+    $('#game').css('left', rand_left).css('top', rand_top);
+}
 
 
 $(function () {
@@ -208,9 +243,9 @@ $(function () {
         var share_url = document.location.href;
 
 
-        var share_message = 'Merezco ser el succesor de Amancio Ortega';
+        var share_message = 'Merezco ser el succesor de Zara';
         if (score) {
-            share_message = ' 👕' + score + ' camisetas dobladas 👊 ¡Supera mi puntuación!';
+            share_message += ' 👕' + score + ' camisetas dobladas 👊 ¡Supera mi puntuación!';
         }
 
 
