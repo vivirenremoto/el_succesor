@@ -39,6 +39,17 @@
     <meta name="twitter:title" content="El sucesor de Zara">
     <meta name="twitter:image" content="https://vivirenremoto.github.io/el_succesor/static/cover.png">
 
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0B3GZTYGXM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-0B3GZTYGXM');
+    </script>
+
 </head>
 <body style="background:#9adae7;">
 
@@ -206,7 +217,6 @@ function EndGame(){
     $('#game').hide();
     $('#author').show();
     clearInterval(timer);
-    //music.pause();
 
     confetti.start();
 
@@ -233,6 +243,8 @@ function randomNumber(min, max) {
 function RandomCamiseta(){
     var rand_left = randomNumber(0,screen_width-shirt_width);
     var rand_top = randomNumber(0,screen_height-shirt_height);
+    
+    if( rand_top < 120 ) rand_top = 120; 
     $('#game').css('left', rand_left).css('top', rand_top);
 }
 
@@ -245,7 +257,7 @@ $(function () {
 
         var share_message = 'Merezco ser el succesor de Zara';
         if (score) {
-            share_message += ' 👕' + score + ' camisetas dobladas 👊 ¡Supera mi puntuación!';
+            share_message += ' He doblado 👕' + score + ' camisetas 👊 ¡Supera mi puntuación!';
         }
 
 
