@@ -4,4 +4,4 @@
 
 [Autor](https://twitter.com/comandogdev)
 
-![El sucesor de Zara](https://vivirenremoto.github.io/el_succesor/static/cover.png)
+![El sucesor de Zara](https://vivirenremoto.github.io/el_succesor/static/cover2.png)
